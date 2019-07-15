@@ -26,6 +26,8 @@ import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Publisher;
 import hudson.util.Scrambler;
 
+import jenkins.tasks.SimpleBuildStep;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,7 +41,10 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.DataBoundConstructor;
+//import org.kohsuke.stapler.DataBoundSetter;
 
 /**
  * Publishes build results to IRC channels.
@@ -48,7 +53,9 @@ import org.kohsuke.stapler.StaplerRequest;
  * @author $Author: kutzi $ (last change)
  * @version $Id: IrcPublisher.java 39408 2011-05-01 10:52:54Z kutzi $
  */
-public class IrcPublisher extends IMPublisher {
+@Symbol("ircnotify")
+@Extension
+public class IrcPublisher extends IMPublisher implements SimpleBuildStep {
 
     private static final Logger LOGGER = Logger.getLogger(IrcPublisher.class.getName());
 
@@ -68,6 +75,7 @@ public class IrcPublisher extends IMPublisher {
 	@Deprecated
     public List<String> channels = new ArrayList<String>();
 
+    @DataBoundConstructor
     public IrcPublisher(List<IMMessageTarget> defaultTargets, String notificationStrategy,
     		boolean notifyGroupChatsOnBuildStart,
     		boolean notifySuspects,
