@@ -25,6 +25,8 @@
   <properties>
     <version.instant-messaging.plugin>1.35</version.instant-messaging.plugin>
     <java.level>8</java.level>
+    <!-- Needed to avoid java.lang.ClassNotFoundException: org.kohsuke.accmod.restrictions.Beta -->
+    <useBeta>true</useBeta>
   </properties>
 
   <dependencies>
@@ -32,6 +34,12 @@
         <groupId>org.jvnet.hudson.plugins</groupId>
         <artifactId>instant-messaging</artifactId>
         <version>${version.instant-messaging.plugin}</version>
+        <scope>compile</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.kohsuke</groupId>
+        <artifactId>access-modifier-checker</artifactId>
+        <version>1.16</version>
         <scope>compile</scope>
     </dependency>
     <dependency>
