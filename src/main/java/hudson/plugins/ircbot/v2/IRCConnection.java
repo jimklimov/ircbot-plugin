@@ -102,11 +102,20 @@ public class IRCConnection implements IMConnection, JoinListener, InviteListener
             config.setCapEnabled(true);
             config.addCapHandler(new SASLCapHandler(this.descriptor.getLogin(), this.descriptor.getSecretPassword().getPlainText()));
         } else {
-            String password = Util.fixEmpty(this.descriptor.getSecretPassword().getPlainText());
-            config.setServerPassword(password);
+            if (this.descriptor.getSecretPassword() != null) {
+                String password = Util.fixEmpty(this.descriptor.getSecretPassword().getPlainText());
+                if (password != null) {
+                    config.setServerPassword(password);
+                }
+            }
         }
-        final String nickServPassword = Util.fixEmpty(this.descriptor.getSecretNickServPassword().getPlainText());
-        config.setNickservPassword(nickServPassword);
+
+        if (this.descriptor.getSecretNickServPassword() != null) {
+            final String nickServPassword = Util.fixEmpty(this.descriptor.getSecretNickServPassword().getPlainText());
+            if (nickServPassword != null) {
+                config.setNickservPassword(nickServPassword);
+            }
+        }
 
 
         String socksHost = Util.fixEmpty(this.descriptor.getSocksHost());
@@ -343,7 +352,7 @@ public class IRCConnection implements IMConnection, JoinListener, InviteListener
         LOGGER.info("Trying to join channel " + channel.getName());
 
         if (channel.hasPassword()) {
-            this.pircConnection.sendIRC().joinChannel(channel.getName(), channel.getPassword());
+            this.pircConnection.sendIRC().joinChannel(channel.getName(), channel.getSecretPassword().getPlainText());
         } else {
             this.pircConnection.sendIRC().joinChannel(channel.getName());
         }
