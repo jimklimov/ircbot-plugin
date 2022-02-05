@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.jenkins-ci.plugins</groupId>
         <artifactId>plugin</artifactId>
-        <version>4.29</version>
+        <version>4.31</version>
         <relativePath />
     </parent>
 
@@ -31,10 +31,10 @@ A build status publisher that notifies channels on a IRC server
     </licenses>
 
     <properties>
-        <revision>2.42</revision>
+        <revision>2.43</revision>
         <changelist>-SNAPSHOT</changelist>
         <gitHubRepo>jenkinsci/${project.artifactId}-plugin</gitHubRepo>
-        <version.instant-messaging.plugin>1.47</version.instant-messaging.plugin>
+        <version.instant-messaging.plugin>1.48</version.instant-messaging.plugin>
         <java.level>8</java.level>
         <jenkins.version>2.320</jenkins.version>
     </properties>
@@ -89,7 +89,7 @@ A build status publisher that notifies channels on a IRC server
         <dependency>
             <groupId>org.jenkins-ci.main</groupId>
             <artifactId>maven-plugin</artifactId>
-            <version>3.15</version>
+            <version>3.16</version>
             <exclusions>
                 <!-- TODO conflict with jenkins-test-harness that wants a newer
                      version currently, see comments in
